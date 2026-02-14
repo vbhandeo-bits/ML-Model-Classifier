@@ -14,6 +14,26 @@ Date: February 14, 2026
 * **Live Streamlit App:** [https://2025ab05033-bits-vb-ml-assignment-2.streamlit.app/]
 
 ---
+##  Problem Statement
+The objective of this project is to develop an **Interactive Multi-Model Classifier** to analyze and predict employee attrition. Using the IBM HR Analytics dataset, this application automates the end-to-end Machine Learning pipeline—including data preprocessing, model training, and performance benchmarking—across six distinct algorithms to identify which model best captures patterns in employee turnover
+
+##  Dataset Description 
+The model is trained and evaluated on the **IBM HR Analytics Employee Attrition & Performance** dataset
+**Total Records:** 1,470 entries
+**Total Features:** 35 features (e.g., Age, Department, JobRole, MonthlyIncome)
+**Missing Values:** 0 (Dataset is clean)
+**Target Variable:** `Attrition` (Binary: Yes/No)
+**Preprocessing:** Includes Label Encoding for categorical features and an 80/20 train-test split
+
+##  Models Used & Evaluation
+Six distinct classification algorithms were implemented and evaluated across all mandatory metrics:
+Logistic Regression,
+Decision Tree,
+kNN,
+Naive Bayes,
+Random Forest (Ensemble),
+XGBoost (Ensemble)
+-
 
 ## 📌 Project Overview
 This project is a comprehensive Machine Learning evaluation tool developed for the BITS Pilani M.Tech curriculum. The application automates the end-to-end ML pipeline, providing a GUI to explore, train, and benchmark six distinct classification algorithms.
