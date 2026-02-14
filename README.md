@@ -21,13 +21,16 @@ The project utilizes the **IBM HR Analytics Employee Attrition** dataset:
 ## 📊 Global Model Benchmarking (Mandatory Metrics)
 The table below represents the performance of all 6 implemented algorithms. These results were captured using an 80/20 train-test split with a fixed random seed for reproducibility.
 
-Model,Accuracy,MCC,AUC,Precision,Recall,F1 Score
-Logistic Regression,0.2279,0.0557,0.5000,0.1395,0.2279,0.1510
-Decision Tree,0.4150,0.3243,0.5000,0.4154,0.4150,0.4128
-k-Nearest Neighbors,0.1871,0.0327,0.5000,0.1526,0.1871,0.1611
-Gaussian Naive Bayes,0.3639,0.2575,0.5000,0.3337,0.3639,0.3284
-Random Forest,0.5170,0.4309,0.5000,0.4363,0.5170,0.4549
-XGBoost,0.5136,0.4348,0.5000,0.4715,0.5136,0.4809
+### 📊 Global Model Performance Comparison
+
+| Model | Accuracy | MCC | AUC | Precision | Recall | F1 Score |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Logistic Regression** | 0.2279 | 0.0557 | 0.5000 | 0.1395 | 0.2279 | 0.1510 |
+| **Decision Tree** | 0.4150 | 0.3243 | 0.5000 | 0.4154 | 0.4150 | 0.4128 |
+| **k-Nearest Neighbors** | 0.1871 | 0.0327 | 0.5000 | 0.1526 | 0.1871 | 0.1611 |
+| **Gaussian Naive Bayes** | 0.3639 | 0.2575 | 0.5000 | 0.3337 | 0.3639 | 0.3284 |
+| **Random Forest** | 0.5170 | 0.4309 | 0.5000 | 0.4363 | 0.5170 | 0.4549 |
+| **XGBoost** | **0.5136** | **0.4348** | **0.5000** | **0.4715** | **0.5136** | **0.4809** |
 
 
 
