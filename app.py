@@ -80,44 +80,75 @@ if uploaded_file is not None:
         "XGBoost": XGBClassifier(random_state=42, n_estimators=100, verbosity=0)
     }
 
-    # Compare All Models Section
-    st.subheader("🏆 Compare All Models Performance")
+   # Compare All Models Section
+    st.subheader("🏆 Global Model Comparison (Mandatory Metrics)")
     
     if st.checkbox("Show Comparison of All 6 Models", value=False):
         comparison_data = []
         
-        for model_name, model in models.items():
-            model.fit(X_train, y_train)
-            y_pred_temp = model.predict(X_test)
-            
-            acc = accuracy_score(y_test, y_pred_temp)
-            prec = precision_score(y_test, y_pred_temp, average='weighted', zero_division=0)
-            rec = recall_score(y_test, y_pred_temp, average='weighted', zero_division=0)
-            f1_temp = f1_score(y_test, y_pred_temp, average='weighted', zero_division=0)
-            
-            comparison_data.append({
-                'Model': model_name,
-                'Accuracy': round(acc, 4),
-                'Precision': round(prec, 4),
-                'Recall': round(rec, 4),
-                'F1 Score': round(f1_temp, 4)
-            })
+        # We wrap this in a spinner because training 6 models takes a few seconds
+        with st.spinner('Training all 6 models... please wait.'):
+            for model_name, model in models.items():
+                # 1. Train
+                model.fit(X_train, y_train)
+                y_pred_temp = model.predict(X_test)
+                
+                # 2. Probabilities for AUC
+                y_prob_temp = model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else y_pred_temp
+                
+                # 3. Calculate metrics (Crucial for Documentation)
+                acc = accuracy_score(y_test, y_pred_temp)
+                prec = precision_score(y_test, y_pred_temp, average='weighted', zero_division=0)
+                rec = recall_score(y_test, y_pred_temp, average='weighted', zero_division=0)
+                f1_temp = f1_score(y_test, y_pred_temp, average='weighted', zero_division=0)
+                mcc_temp = matthews_corrcoef(y_test, y_pred_temp)
+                
+                try:
+                    auc_val = roc_auc_score(y_test, y_prob_temp)
+                except:
+                    auc_val = 0.5 
+                
+                # 4. Append ALL 6 required parameters
+                comparison_data.append({
+                    'Model': model_name,
+                    'Accuracy': round(acc, 4),
+                    'MCC': round(mcc_temp, 4),      
+                    'AUC': round(auc_val, 4),
+                    'Precision': round(prec, 4),
+                    'Recall': round(rec, 4),
+                    'F1 Score': round(f1_temp, 4)
+                })
         
+        # Display the Table
         comparison_df = pd.DataFrame(comparison_data)
-        st.dataframe(comparison_df, use_container_width=True)
+        st.table(comparison_df) 
         
-        # Visualization of comparison
-        fig, ax = plt.subplots(figsize=(12, 5))
-        comparison_df.set_index('Model')[['Accuracy', 'Precision', 'Recall', 'F1 Score']].plot(kind='bar', ax=ax)
-        ax.set_title('Model Performance Comparison')
-        ax.set_ylabel('Score')
-        ax.set_xlabel('Model')
-        ax.legend(loc='lower right')
-        ax.grid(axis='y', alpha=0.3)
+        # Visual Output (Comparison Chart)
+        st.write("**Visual Comparison: All Performance Metrics**")
+        
+        # Define the list of all metrics we want to see
+        all_metrics = ['Accuracy', 'MCC', 'AUC', 'Precision', 'Recall', 'F1 Score']
+        
+        fig, ax = plt.subplots(figsize=(14, 7)) # Increased width for 6 metrics
+        
+        # Plotting all 6 metrics
+        comparison_df.set_index('Model')[all_metrics].plot(kind='bar', ax=ax)
+        
+        ax.set_title("Comprehensive Model Comparison (All 6 Metrics)", fontsize=16)
+        ax.set_ylabel("Score", fontsize=12)
+        ax.set_ylim(0, 1.1) 
+        
+        
+        ax.legend(title="Metrics", bbox_to_anchor=(1.05, 1), loc='upper left')
+        
+        plt.xticks(rotation=45)
+        plt.grid(axis='y', linestyle='--', alpha=0.5)
         plt.tight_layout()
-        st.pyplot(fig)
         
-        st.write("**Best Model by Accuracy:**", comparison_df.loc[comparison_df['Accuracy'].idxmax(), 'Model'])
+        st.pyplot(fig)
+        # Markdown based code to see it in terminal
+        print(comparison_df.to_markdown(index=False))
+        st.success(f"Best Model by Accuracy: {comparison_df.loc[comparison_df['Accuracy'].idxmax(), 'Model']}")
     
     st.divider()
 
