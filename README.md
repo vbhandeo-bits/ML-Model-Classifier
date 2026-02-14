@@ -5,7 +5,8 @@ A Streamlit-based machine learning application for classification tasks. This pr
 ## What's Included
 
 **Data Management**
-- CSV file upload functionality
+- CSV file upload functionality with sample HR Employee Attrition dataset
+- Download pre-loaded sample dataset directly from the app for easy testing
 - Automatic preprocessing of categorical data using label encoding
 - Dataset overview showing record count, features, and missing values
 - Data statistics explorer
@@ -46,6 +47,16 @@ The app calculates and displays:
 - Precision-Recall curve for threshold analysis
 - Feature importance bar chart (for tree models)
 - Classification Report with per-class breakdown
+
+## Sample Dataset
+
+The app includes a pre-loaded **HR Employee Attrition** dataset that you can download directly from the application. This dataset contains:
+- Employee information and attributes
+- Multiple features for classification
+- Binary target variable (Attrition: Yes/No)
+- Perfect for testing all classification models
+
+Click the "📊 Download Sample Dataset" button in the app to get the CSV file.
 
 ## Installation
 

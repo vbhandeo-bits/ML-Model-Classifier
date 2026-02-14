@@ -16,6 +16,22 @@ from sklearn.preprocessing import LabelEncoder
 st.title("ML Model Classifier - BITS Assignment 2")
 
 # a. Dataset upload option [cite: 91]
+st.subheader("📥 Upload Dataset")
+
+# Sample dataset download
+try:
+    sample_data = pd.read_csv('WA_Fn-UseC_-HR-Employee-Attrition.csv')
+    csv_bytes = sample_data.to_csv(index=False).encode()
+    st.download_button(
+        label="📊 Download Sample Dataset (HR Employee Attrition)",
+        data=csv_bytes,
+        file_name="HR_Employee_Attrition.csv",
+        mime="text/csv",
+        help="Download pre-loaded sample dataset for testing"
+    )
+except FileNotFoundError:
+    st.info("Sample dataset not found in repo")
+
 uploaded_file = st.file_uploader("Upload your Test CSV data", type="csv")
 
 if uploaded_file is not None:
