@@ -1,6 +1,14 @@
 # 🎓 BITS Pilani: Machine Learning Assignment 2
 ### **Title:** Interactive Multi-Model Classifier for HR Attrition Analysis
 
+Student Name: VAIBHAV BHANDEO
+
+Student ID: 2025AB05033
+
+Course: S1-25_AIMLCZG565
+
+Date: February 14, 2026
+
 ## 🔗 Project Links
 * **GitHub Repository:** [https://github.com/vbhandeo-bits/ML-Model-Classifier](https://github.com/vbhandeo-bits/ML-Model-Classifier)
 * **Live Streamlit App:** [https://2025ab05033-bits-vb-ml-assignment-2.streamlit.app/]
