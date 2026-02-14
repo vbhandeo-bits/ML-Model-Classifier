@@ -64,6 +64,26 @@ The table below represents the performance of all 6 implemented algorithms. Thes
 
 ---
 
+##  Detailed Model Observations  
+
+The following analysis explains the behavior of each algorithm specifically on the HR Attrition dataset:
+
+| ML Model Name | Observation about model performance |
+| :--- | :--- |
+| **Logistic Regression** | **Underperformed:** Achieved the lowest Accuracy (0.2279). As a linear model, it failed to find a hyperplane that could separate the classes in this 35-feature high-dimensional space. |
+| **Decision Tree** | **Moderate Success:** Showed a significant jump in Accuracy (0.4150). It successfully captured non-linear decision boundaries through hierarchical splits, though it likely struggled with high variance. |
+| **kNN** | **Poor Fit:** Recorded the lowest MCC (0.0327). This suggests that "attrition" cases are not locally clustered, meaning an employee's similarity to their neighbors in the dataset is not a strong predictor of their exit. |
+| **Naive Bayes** | **Average Performance:** Achieved 0.3639 Accuracy. Its performance was hindered by the "independence assumption," as HR features like 'YearsInCurrentRole' and 'YearsAtCompany' are logically correlated. |
+| **Random Forest (Ensemble)** | **Strong Performer:** Achieved 0.5170 Accuracy. By using Bagging (Bootstrap Aggregating), it reduced the overfitting common in single trees and handled the large feature set with much higher stability. |
+| **XGBoost (Ensemble)** | **Most Robust:** Delivered the highest MCC (0.4348). Its Gradient Boosting framework effectively optimized the loss function for the imbalanced target class, making it the best model for this specific dataset. |
+
+
+
+##  Technical Inference
+* **Dimensionality Challenge:** The consistent ROC-AUC of 0.5 across several models highlights that the models possess limited discriminative power under default settings, likely due to the high number of features (35).
+* **Metrics Importance:** While Accuracy is around 51%, the **MCC and F1-Scores** provide a more realistic picture of performance given the class imbalance in attrition data.
+
+
 ## 📝 Technical Observations & Inference
 * **Primary Metric (MCC):** Given the class imbalance in attrition data (fewer "Yes" cases), the **Matthews Correlation Coefficient (MCC)** was used as the most reliable indicator of model quality.
 * **Top Performer:** The **XGBoost** model generally performed best, balancing high Precision and Recall.
